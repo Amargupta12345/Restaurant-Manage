@@ -2,19 +2,19 @@ import Header from "./Header";
 import Main from "./Main";
 import Basket from "./Basket";
 import data from "../data";
-import { useState } from "react";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
 
- const componentRef = useRef();
- const handlePrint = useReactToPrint({
-   content: () => componentRef.current,
- });
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -53,10 +53,12 @@ function App() {
         ></Basket>
       </div>
       <Button
+        component={Link}
+        to="/"
         onClick={handlePrint}
         variant="contained"
         color="primary"
-        style={{width : "25%" , float : "right" , marginRight : "70px"}}
+        style={{ width: "25%", float: "right", marginRight: "70px" }}
       >
         Print
       </Button>
