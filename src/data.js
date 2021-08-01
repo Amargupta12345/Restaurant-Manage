@@ -25,6 +25,12 @@ const data = {
       price: 524,
       image: img3
     },
+    {
+      id: '4',
+      name: 'Pizza',
+      price: 824,
+      image: img5
+    },
   ],
 };
 export default data;

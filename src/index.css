@@ -22,10 +22,17 @@ a {
   display: flex;
   justify-content: space-between;
 }
+.print {
+  display: flex;
+  justify-content: space-between;
+}
 .row.center {
   align-items: center;
 }
 .col-1 {
+  flex: 1;
+}
+.col-3 {
   flex: 1;
 }
 .col-2 {

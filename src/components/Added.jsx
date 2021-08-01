@@ -3,10 +3,19 @@ import Main from "./Main";
 import Basket from "./Basket";
 import data from "../data";
 import { useState } from "react";
+import React, { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import { Button } from "@material-ui/core";
 
 function App() {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+
+ const componentRef = useRef();
+ const handlePrint = useReactToPrint({
+   content: () => componentRef.current,
+ });
+
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -33,17 +42,24 @@ function App() {
   };
   return (
     <div className="App">
-      
-          <Header countCartItems={cartItems.length}></Header>
-          <div className="row">
-            <Main products={products} onAdd={onAdd}></Main>
-            <Basket
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-            ></Basket>
-          </div>
-        
+      <Header countCartItems={cartItems.length}></Header>
+      <div className="row">
+        <Main products={products} onAdd={onAdd}></Main>
+        <Basket
+          cartItems={cartItems}
+          onAdd={onAdd}
+          onRemove={onRemove}
+          ref={componentRef}
+        ></Basket>
+      </div>
+      <Button
+        onClick={handlePrint}
+        variant="contained"
+        color="primary"
+        style={{width : "25%" , float : "right" , marginRight : "70px"}}
+      >
+        Print
+      </Button>
     </div>
   );
 }
